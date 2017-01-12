@@ -1,7 +1,6 @@
 package network
 
 import (
-	"bytes"
 	"fmt"
 	"net"
 )
@@ -17,7 +16,7 @@ type Route struct {
 
 func (r Route) String() string {
 	var gw string
-	if bytes.Equal(r.Gateway, net.IPv6zero) || bytes.Equal(r.Gateway, net.IPv4zero) {
+	if r.Gateway.IsUnspecified() {
 		gw = "Local-link"
 	} else {
 		gw = fmt.Sprintf("%s", r.Gateway)
