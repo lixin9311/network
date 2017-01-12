@@ -100,20 +100,20 @@ Persistent Routes:
 You may get output like this.
 
 ```dos
-C:\mygo\src\github.com\lixin9311\network\demo>go run GetRoute.go
+C:\mygo\src\github.com\lixin9311\network\demo>go run GetRoutes.go
 route: 0.0.0.0/0 via Ethernet id 11 gateway 192.168.1.1 metric 15
-route: 127.0.0.0/8 via Loopback Pseudo-Interface 1 id 1 gateway 0.0.0.0 metric 256
-route: 127.0.0.1/32 via Loopback Pseudo-Interface 1 id 1 gateway 0.0.0.0 metric 256
-route: 127.255.255.255/32 via Loopback Pseudo-Interface 1 id 1 gateway 0.0.0.0 metric 256
-route: 192.168.1.0/24 via Ethernet id 11 gateway 0.0.0.0 metric 256
-route: 192.168.1.6/32 via Ethernet id 11 gateway 0.0.0.0 metric 256
-route: 192.168.1.255/32 via Ethernet id 11 gateway 0.0.0.0 metric 256
-route: 224.0.0.0/4 via Loopback Pseudo-Interface 1 id 1 gateway 0.0.0.0 metric 256
-route: 224.0.0.0/4 via Ethernet 3 id 14 gateway 0.0.0.0 metric 256
-route: 224.0.0.0/4 via Ethernet id 11 gateway 0.0.0.0 metric 256
-route: 255.255.255.255/32 via Loopback Pseudo-Interface 1 id 1 gateway 0.0.0.0 metric 256
-route: 255.255.255.255/32 via Ethernet 3 id 14 gateway 0.0.0.0 metric 256
-route: 255.255.255.255/32 via Ethernet id 11 gateway 0.0.0.0 metric 256
+route: 127.0.0.0/8 via Loopback Pseudo-Interface 1 id 1 gateway Local-link metric 256
+route: 127.0.0.1/32 via Loopback Pseudo-Interface 1 id 1 gateway Local-link metric 256
+route: 127.255.255.255/32 via Loopback Pseudo-Interface 1 id 1 gateway Local-link metric 256
+route: 192.168.1.0/24 via Ethernet id 11 gateway Local-link metric 256
+route: 192.168.1.6/32 via Ethernet id 11 gateway Local-link metric 256
+route: 192.168.1.255/32 via Ethernet id 11 gateway Local-link metric 256
+route: 224.0.0.0/4 via Loopback Pseudo-Interface 1 id 1 gateway Local-link metric 256
+route: 224.0.0.0/4 via Ethernet 3 id 14 gateway Local-link metric 256
+route: 224.0.0.0/4 via Ethernet id 11 gateway Local-link metric 256
+route: 255.255.255.255/32 via Loopback Pseudo-Interface 1 id 1 gateway Local-link metric 256
+route: 255.255.255.255/32 via Ethernet 3 id 14 gateway Local-link metric 256
+route: 255.255.255.255/32 via Ethernet id 11 gateway Local-link metric 256
 route: ::/0 via Ethernet id 11 gateway fe80::1 metric 256
 route: ::1/128 via Loopback Pseudo-Interface 1 id 1 gateway Local-link metric 256
 route: 240d:1a:60e:7f00::/64 via Ethernet id 11 gateway Local-link metric 256
