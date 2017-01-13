@@ -143,6 +143,17 @@ func (row *nMIBIpforwardRow2) ToRoute() *Route {
 	return &Route{ipnet, ifce, gateway, isDefault, metric}
 }
 
+func newMIBIpforwardRow2() *nMIBIpforwardRow2 {
+	return &nMIBIpforwardRow2{
+		ValidLifetime:     0xffffffff,
+		PreferredLifetime: 0xffffffff,
+		Protocol:          nRouteProtocolNetMgmt,
+		Immortal:          true,
+		Origin:            nNlroManual,
+		Metric:            0xffffffff,
+	}
+}
+
 type nMIBIpforwardTable2 struct {
 	NumEntries uint32
 	Table      [128]nMIBIpforwardRow2
