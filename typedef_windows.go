@@ -70,6 +70,21 @@ type nRawSockAddrAny struct {
 	data   [26]byte
 }
 
+func ParseIP(ip net.IP) *nRawSockAddrAny {
+	ret := &nRawSockAddrAny{}
+	if ip4 := ip.To4(); ip4 != nil {
+		ret.family = nAF_INET
+		copy(ret.data[2:], ip4)
+		return ret
+	}
+	if ip6 := ip.To16(); ip6 != nil {
+		ret.family = nAF_INET6
+		copy(ret.data[6:], ip6)
+		return ret
+	}
+	return nil
+}
+
 type nIPAddressPrefix struct {
 	Prefix       nRawSockAddrAny
 	PrefixLength uint8
