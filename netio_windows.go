@@ -31,7 +31,7 @@ func getIPForwardTable2(family nAddressFamily, table **nMIBIpforwardTable2) erro
 }
 
 func freeMibTable(table *nMIBIpforwardTable2) error {
-	_, _, err := syscall.Syscall(ngetIPForwardTable2, 1, uintptr(unsafe.Pointer(table)), 0, 0)
+	_, _, err := syscall.Syscall(nFreeMibTable, 1, uintptr(unsafe.Pointer(table)), 0, 0)
 	return err
 }
 
