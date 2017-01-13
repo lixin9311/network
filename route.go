@@ -7,11 +7,11 @@ import (
 
 // Route is the struct of an entry in route table
 type Route struct {
-	*net.IPNet
-	Iface   *net.Interface
-	Gateway net.IP
-	Default bool
-	Metric  int
+	*net.IPNet // match prefix
+	Iface      *net.Interface
+	Gateway    net.IP
+	Default    bool
+	Metric     int
 }
 
 func (r Route) String() string {
@@ -21,7 +21,7 @@ func (r Route) String() string {
 	} else {
 		gw = fmt.Sprintf("%s", r.Gateway)
 	}
-	s := fmt.Sprintf("%s via %s id %d gateway %s metric %d", r.IPNet, r.Iface.Name, r.Iface.Index, gw, r.Metric)
+	s := fmt.Sprintf("prefix %s via %s id %d gateway %s metric %d", r.IPNet, r.Iface.Name, r.Iface.Index, gw, r.Metric)
 	return s
 }
 
