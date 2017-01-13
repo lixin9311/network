@@ -53,7 +53,7 @@ const (
 type nRawSockaddrInet4 struct {
 	family nAddressFamily
 	port   uint16
-	addr   net.IP
+	addr   [4]byte
 	zero   [8]byte
 }
 
