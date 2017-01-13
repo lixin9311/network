@@ -95,6 +95,39 @@ type nMIBIpforwardRow2 struct {
 	Origin               nNLRouteOrigin
 }
 
+func (row *nMIBIpforwardRow2) ToRoute() *Route {
+	family := row.DestinationPrefix.Prefix.family
+	saData := row.DestinationPrefix.Prefix.data
+	gwData := row.NextHop.data
+	length := int(row.DestinationPrefix.PrefixLength)
+	metric := int(row.Metric)
+	var ip []byte
+	var gateway []byte
+	var mask net.IPMask
+	if family == nAF_INET {
+		ip = make([]byte, net.IPv4len)
+		copy(ip, saData[2:])
+		mask = net.CIDRMask(length, net.IPv4len*8)
+		gateway = make([]byte, net.IPv4len)
+		copy(gateway, gwData[2:])
+	} else if family == nAF_INET6 {
+		ip = make([]byte, net.IPv6len)
+		copy(ip, saData[6:])
+		mask = net.CIDRMask(length, net.IPv6len*8)
+		gateway = make([]byte, net.IPv6len)
+		copy(gateway, gwData[6:])
+	} else {
+		return nil
+	}
+	ipnet := &net.IPNet{IP: ip, Mask: mask}
+	ifce, _ := net.InterfaceByIndex(int(row.InterfaceIndex))
+	isDefault := false
+	if length == 0 {
+		isDefault = true
+	}
+	return &Route{ipnet, ifce, gateway, isDefault, metric}
+}
+
 type nMIBIpforwardTable2 struct {
 	NumEntries uint32
 	Table      [128]nMIBIpforwardRow2

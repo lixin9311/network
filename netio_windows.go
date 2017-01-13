@@ -50,37 +50,9 @@ func getRoutes() ([]Route, error) {
 	defer freeMibTable(table)
 	routes := make([]Route, 0, int(table.NumEntries))
 	for i := 0; i < int(table.NumEntries); i++ {
-		family := table.Table[i].DestinationPrefix.Prefix.family
-		saData := table.Table[i].DestinationPrefix.Prefix.data
-		gwData := table.Table[i].NextHop.data
-		length := int(table.Table[i].DestinationPrefix.PrefixLength)
-		metric := int(table.Table[i].Metric)
-		var ip []byte
-		var gateway []byte
-		var mask net.IPMask
-		if family == nAF_INET {
-			ip = make([]byte, net.IPv4len)
-			copy(ip, saData[2:])
-			mask = net.CIDRMask(length, net.IPv4len*8)
-			gateway = make([]byte, net.IPv4len)
-			copy(gateway, gwData[2:])
-		} else if family == nAF_INET6 {
-			ip = make([]byte, net.IPv6len)
-			copy(ip, saData[6:])
-			mask = net.CIDRMask(length, net.IPv6len*8)
-			gateway = make([]byte, net.IPv6len)
-			copy(gateway, gwData[6:])
-		} else {
-			continue
+		if route := table.Table[i].ToRoute(); route != nil {
+			routes = append(routes, *route)
 		}
-		ipnet := &net.IPNet{IP: ip, Mask: mask}
-		ifce, _ := net.InterfaceByIndex(int(table.Table[i].InterfaceIndex))
-		isDefault := false
-		if length == 0 {
-			isDefault = true
-		}
-		route := Route{ipnet, ifce, gateway, isDefault, metric}
-		routes = append(routes, route)
 	}
 	return routes, nil
 }
