@@ -70,7 +70,7 @@ type nRawSockAddrAny struct {
 	data   [26]byte
 }
 
-func ParseIP(ip net.IP) *nRawSockAddrAny {
+func parseIP(ip net.IP) *nRawSockAddrAny {
 	ret := &nRawSockAddrAny{}
 	if ip4 := ip.To4(); ip4 != nil {
 		ret.family = nAF_INET

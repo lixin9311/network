@@ -103,7 +103,7 @@ func getRoute(ip net.IP) (*Route, error) {
 	nGetBestRoute2 = getProcAddr(iph, "GetBestRoute2")
 
 	var ifIndex nNetIFIndex
-	dstAddr := ParseIP(ip)
+	dstAddr := parseIP(ip)
 	if dstAddr == nil {
 		return nil, errInvalidAddr
 	}
