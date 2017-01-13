@@ -29,3 +29,8 @@ func (r Route) String() string {
 func GetRoutes() ([]Route, error) {
 	return getRoutes()
 }
+
+// GetRoute return the route with a given ip address
+func GetRoute(ip net.IP) (*Route, error) {
+	return getRoute(ip)
+}
